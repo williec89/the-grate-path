@@ -1,0 +1,48 @@
+<template>
+    <div id="nav">
+        <router-link to="/welcome">Welcome</router-link> |
+        <router-link to="/">Home</router-link>
+        <template v-if="$user.state.value !== 'starting'"> |
+            <router-link v-if="$user.state.value === 'no_user'" to="/signin">Sign in</router-link>
+            <a href="#" v-if="$user.state.value === 'authenticated'" @click="signout">Sign out ({{$user.state.context.user.displayName}})</a>
+        </template>
+    </div>
+    <router-view />
+</template>
+
+<script>
+export default {
+    methods: {
+        signout () {
+            this.$user.service.send('SIGNOUT')
+        }
+    }
+}
+</script>
+
+<style lang="scss">
+body {
+    margin: 0;
+    padding: 0;
+}
+#app {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+}
+
+#nav {
+    padding: 30px;
+
+    a {
+        font-weight: bold;
+        color: #2c3e50;
+
+        &.router-link-exact-active {
+            color: #42b983;
+        }
+    }
+}
+</style>
