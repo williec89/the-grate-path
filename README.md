@@ -1,4 +1,4 @@
-# w3pp
+# vue 3 firebase ui boilerplate
 
 ## Project setup
 ```
