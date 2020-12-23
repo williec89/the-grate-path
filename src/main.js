@@ -9,7 +9,7 @@ import { auth } from '@/firebase'
 import { authPromise } from '@/services/deferredPromises'
 
 auth.onAuthStateChanged(user => {
-    $user.service.send({
+    $user.send({
         type: 'CHANGED',
         user
     })
@@ -18,19 +18,15 @@ auth.onAuthStateChanged(user => {
 
 let signInSuccessRedirect = '/'
 $user.service.onTransition(state => {
-    console.log(state.value)
-    console.log('router.currentRoute.value.name', router.currentRoute.value)
     if (router.currentRoute.value.name) {
         if (
-            state.value === 'authenticated' &&
+            state.matches('authenticated') &&
             router.currentRoute.value.name === 'Signin'
         ) {
-            console.log('signed in')
-            console.log('going to', signInSuccessRedirect)
             router.replace(signInSuccessRedirect)
         } else if (
             // if signed out on an authenticated page, save route and redirect
-            state.value === 'no_user' &&
+            state.matches('no_user') &&
             router.currentRoute.value.matched.some(record => record.meta.requiresAuth)
         ) {
             router.push('/welcome')
@@ -41,14 +37,14 @@ $user.service.onTransition(state => {
 router.beforeEach(async (to, from, next) => {
     if (to.matched.some(record => record.meta.requiresAuth)) {
         await authPromise
-        if ($user.state.value === 'no_user' && to.name !== 'Signin') {
+        if ($user.state.value.matches('no_user') && to.name !== 'Signin') {
             if (to.name !== 'Home' || from.name === 'Welcome') {
                 signInSuccessRedirect = to
                 return next('/signin')
             } else {
                 return next('/welcome')
             }
-        } else if ($user.state.value === 'authenticated' && to.name === 'Signin') {
+        } else if ($user.state.value.matches('authenticated') && to.name === 'Signin') {
             return next('/')
         }
     }

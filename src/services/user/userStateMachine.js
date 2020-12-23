@@ -60,7 +60,7 @@ const config = {
     }
 }
 
-export const userStateMachine = Machine(config, {
+export const machine = Machine(config, {
     actions: {},
     services: {},
     guards: {}

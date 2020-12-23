@@ -1,8 +1,7 @@
-import VueXstate from '@/helpers/VueXstate'
-import { userStateMachine } from './userStateMachine'
+import { useMachine } from '@/helpers/VueXstate'
+import { machine } from './userStateMachine'
 
-export const $user = (window.$user = new VueXstate(userStateMachine))
-$user.service.start()
+export const $user = (window.$user = useMachine({ machine }))
 
 export default {
     install: app => {
