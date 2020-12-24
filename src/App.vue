@@ -19,7 +19,7 @@ export default {
     },
     methods: {
         signout () {
-            this.$user.service.send('SIGNOUT')
+            this.$user.send('SIGNOUT')
         }
     }
 }
