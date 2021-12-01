@@ -1,8 +1,8 @@
 <template>
     <div id="nav">
-        <router-link to="/welcome">Welcome</router-link> |
-        <router-link to="/">Home</router-link>
-        <template v-if="!state.matches('starting')"> |
+        <router-link to="/">The Path</router-link>  |
+        <router-link to="/welcome">Create</router-link>  |
+        <template v-if="!state.matches('starting')">
             <router-link v-if="state.matches('no_user')" to="/signin">Sign in</router-link>
             <a href="#" v-if="state.matches('authenticated')" @click="signout">Sign out ({{state.context.user.displayName}})</a>
         </template>
@@ -29,6 +29,7 @@ export default {
 body {
     margin: 0;
     padding: 0;
+    background-color: #FAF9F6;
 }
 #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
