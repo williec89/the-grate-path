@@ -20,15 +20,15 @@
 export default {
     computed: {
         state() {
-            return this.$user.state.value;
+            return this.$user.state.value
         }
     },
     methods: {
         signout() {
-            this.$user.send("SIGNOUT");
+            this.$user.send('SIGNOUT')
         }
     }
-};
+}
 </script>
 
 <style lang="scss">
