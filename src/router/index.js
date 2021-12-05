@@ -15,6 +15,18 @@ const routes = [
             import(/* webpackChunkName: "welcome" */ '../views/Welcome.vue')
     },
     {
+        path: '/add',
+        name: 'Add',
+        component: () =>
+            import(/* webpackChunkName: "welcome" */ '../views/Add.vue')
+    },
+    {
+        path: '/paths',
+        name: 'Paths',
+        component: () =>
+            import(/* webpackChunkName: "Paths" */ '../views/Paths.vue')
+    },
+    {
         path: '/signin',
         name: 'Signin',
         meta: { requiresAuth: true },
