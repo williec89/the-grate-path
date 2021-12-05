@@ -3,16 +3,16 @@ import { createRouter, createWebHistory } from 'vue-router'
 const routes = [
     {
         path: '/',
-        name: 'Home',
+        name: 'Paths',
         meta: { requiresAuth: true },
         component: () =>
-            import(/* webpackChunkName: "home" */ '../views/Home.vue')
+            import(/* webpackChunkName: "path" */ '../views/Paths.vue')
     },
     {
-        path: '/welcome',
-        name: 'Welcome',
+        path: '/add',
+        name: 'Add',
         component: () =>
-            import(/* webpackChunkName: "welcome" */ '../views/Welcome.vue')
+            import(/* webpackChunkName: "add" */ '../views/Add.vue')
     },
     {
         path: '/signin',
